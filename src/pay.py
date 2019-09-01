@@ -25,7 +25,7 @@ class PayApi(BaseHandler):
             total_amount=price,  # 交易金额(单位: 元 保留俩位小数)
         )
         pay_url = "https://openapi.alipaydev.com/gateway.do?{}".format(query_params)
-        ret['data']=pay_url
+        ret['data']=pay_url # 返回支付宝支付跳转url，微信沙箱要用到真实账号，只是调用的url加上sandbox而已
         self.write(BaseHandler.success_ret_with_data(ret))
 
 def aliPay():
