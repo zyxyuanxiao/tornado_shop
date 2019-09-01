@@ -62,6 +62,8 @@ class PayResultApi(BaseHandler):
             self.write("支付异常")
 
     async def post(self):
+        print(self.request.body)
+        print(self.request.arguments)
         args = escape.json_decode(self.request.body)
         print(args)
         post_dict = {}
