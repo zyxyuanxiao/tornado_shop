@@ -62,17 +62,14 @@ class PayResultApi(BaseHandler):
             self.write("支付异常")
 
     async def post(self):
-        print(self.request.body)
-        print(self.request.arguments)
-        args = escape.json_decode(self.request.body)
-        print(args)
-        post_dict = {}
-        for k, v in args.items():
-            post_dict[k] = v[0]  # 解析字典
+        params = self.request.arguments
+        data = {}
+        for k, v in params.items():
+            data[k] = v[0].decode()
         alipay = aliPay()
-        sign = post_dict.pop('sign', None)
-        status = alipay.verify(post_dict, sign)
+        sign = data.pop('sign', None)
+        status = alipay.verify(data, sign)
         if status:
             # 这一步去数据库修改订单状态
-            out_trade_no = post_dict.get('out_trade_no')
+            out_trade_no = data.get('out_trade_no')
             print(out_trade_no)
