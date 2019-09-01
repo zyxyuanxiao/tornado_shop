@@ -63,6 +63,7 @@ class PayResultApi(BaseHandler):
 
     async def post(self):
         args = escape.json_decode(self.request.body)
+        print(args)
         post_dict = {}
         for k, v in args.items():
             post_dict[k] = v[0]  # 解析字典
